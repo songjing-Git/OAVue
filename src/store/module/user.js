@@ -1,34 +1,39 @@
 export default {
     state: {
-        user:{
-            STAFF_ID:'',//编号
-            STAFF_NAME:'',//姓名
-            GENDER:'',
-            USER_NAME:'',//用户名
-            DEPT_NAME:'',
-            PHONE:'',
-            EMAIL:'',
-            JOB_LEVEL_NAME:'',
-            NATION:'',
-            PAYBALE_SALARY:'',
-            NATIVE_PLACE:'',
-            ADDRESS:'',
-            WORK_AGE:'',
-            BIRTHDAY:'',
+
+            staffId:0,//编号
+            staffName:'',//姓名
+            age:0,
+            gender:'',
+            userName:'',//用户名
+            departId:0,
+            departName:'',
+            departMgr:"",
+            departStaffMax:0,
+            departStaffCount:0,
+            phone:'',
+            email:'',
+            jobLevelId:"",
+            jobLevelName:'',
+            jobLevel:'',
+            jobLevelType:'',
+            nation:'',
+            nativePlace:0,
+            address:'',
+            workAge:'',
+            birthday:0,
             BASE_SALARY:'',
             access: '',//权限等级
             HEAD_PHOTO:'',//头像
-        }
+            salaryId:0,
+
 
     },
     getters:{
-        getUserInfo: state =>{
-            return state.user
-        }
     },
     mutations:{
         setUserInfo (state,userInfo) {
-            state.user = userInfo
+            state =userInfo
         }
     },
     actions:{

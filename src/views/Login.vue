@@ -86,6 +86,8 @@
                         this.$store.user=res
                         this.$store.dispatch('setUserInfo',res)
                     }
+                    console.log(this.$store.user.departName)
+                    console.log(this.$store.user)
                 })
                 this.$router.push("/home")
 

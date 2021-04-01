@@ -3,23 +3,20 @@
         <div class="search-con search-con-top">
             <Form inline :label-width="100">
                 <FormItem  label="员工编号:">
-                    <Input v-model="search.staffId"></Input>
+                    <Input v-model="search.staff_id" ></Input>
                 </FormItem>
                 <FormItem  label="员工名称:">
-                    <Input v-model="search.staffName"></Input>
+                    <Input v-model="search.staff_name"></Input>
                 </FormItem>
                 <FormItem  label="所属部门:">
-                    <Input v-model="search.deptName"></Input>
+                    <Input v-model="search.depart_name"></Input>
                 </FormItem>
                 <FormItem  label="员工职级:">
-                    <Input v-model="search.jobName"></Input>
+                    <Input v-model="search.job_level_name"></Input>
                 </FormItem>
                 <template v-if="isShow">
                     <FormItem  label="联系电话:">
                         <Input v-model="search.phone"></Input>
-                    </FormItem>
-                    <FormItem  label="上级:">
-                        <Input v-model="search.mgrName"></Input>
                     </FormItem>
                     <FormItem  label="邮箱:">
                         <Input v-model="search.email">
@@ -27,7 +24,7 @@
                         </Input>
                     </FormItem>
                 </template>
-                <Button class="search-btn" type="primary" icon="ios-search" @click="StaffInfoSearch">搜索</Button>
+                <Button class="search-btn" type="primary" icon="ios-search" @click="StaffInfoSearch" >搜索</Button>
                 <Button class="search-btn" type="primary" :icon="isShow?`ios-arrow-up`:`ios-arrow-down`" @click="onIsSearch" ></Button>
 
             </Form>
@@ -53,12 +50,13 @@
             <slot name="header" slot="header">
                 <Button type="error"  @click="isAddStaff = true" style="margin-left: 90%">新增</Button>
                 <Modal
+                    ref="addStaffSubmit"
                     :width="780"
                     v-model="isAddStaff"
                     title="添加员工"
                     @on-ok="ok"
                     @on-cancel="cancel">
-                    <AddStaff :depart="depart"/>
+                    <AddStaff :depart="depart" />
 
 
                 </Modal>
@@ -68,6 +66,8 @@
                     title="修改员工"
                     @on-ok="ok"
                     @on-cancel="cancel">
+
+
                 </Modal>
             </slot>
             <slot name="footer" slot="footer">
@@ -108,23 +108,23 @@
                         width: 60,
                         align: 'center'
                     },
-                    { title: '员工编号' ,key:'STAFF_ID', align: 'center'},
-                    { title: '员工姓名', key: 'STAFF_NAME' ,sortable: true,align: 'center' },
-                    { title: '性别',  key: 'GENDER' ,align: 'center'},
-                    { title: '生日',key: 'BIRTHDAY', sortable: true,align: 'center' },
-                    { title: '在职状态',key: 'WORK_STATE',align: 'center'},
-                    { title: '联系方式' , key: 'PHONE',align: 'center'},
-                    { title: '所属部门' , key: 'DEPT_NAME' ,align: 'center'},
-                    { title: '职位等级' , key: 'JOB_LEVEL_NAME',align: 'center'},
-                    { title: '薪资' ,key: 'PAYBALE_SALARY' ,align: 'center'},
+                    { title: '员工编号' ,key:'staff_id', align: 'center'},
+                    { title: '员工姓名', key: 'staff_name' ,sortable: true,align: 'center' },
+                    { title: '性别',  key: 'gender' ,align: 'center'},
+                    { title: '生日',key: 'birthday', sortable: true,align: 'center' },
+                    { title: '在职状态',key: 'work_state',align: 'center'},
+                    { title: '联系方式' , key: 'phone',align: 'center'},
+                    { title: '所属部门' , key: 'departName' ,align: 'center'},
+                    { title: '职位等级' , key: 'jobLevelName',align: 'center'},
+                    { title: '薪资' ,key: 'paySalary' ,align: 'center'},
                     { title: '更多信息' ,slot: 'addInfo',align: 'center'},
                 ],
                 search:{
-                    staffId:'',
-                    staffName:'',
-                    deptName:'',
-                    jobName:'',
-                    mgrName:'',
+                    staff_id:'',
+                    staff_name:'',
+                    depart_name:'',
+                    job_level_name:'',
+
                     email:'',
                     phone:'',
                     pageSize:10,
@@ -142,7 +142,7 @@
                 isShow:false,
                 isAddStaff:false,
                 isUpdateStaff:false,
-
+                StaffInfo:Object
 
             }
         },
@@ -172,8 +172,17 @@
             onIsSearch(){
                 this.isShow=!this.isShow
             },
-            ok () {
-                this.$Message.success('提交成功');
+            ok (staffInfo) {
+                console.log(staffInfo)
+                api.insertStaffInfo(staffInfo).then(
+                    res=>{
+                        this.$Message.success('提交成功');
+                    },
+                    rej=>{
+                        this.$Message.error(rej)
+                    }
+                )
+
             },
             cancel () {
                 this.$Message.info('取消成功');
@@ -211,6 +220,7 @@
                     }
                 )
             },
+
         },
         computed: {
         },

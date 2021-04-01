@@ -101,10 +101,11 @@
                     records:[],
                 },
                 columns: [
-                    { title: '职位编号' ,key: 'jobId'},
-                    { title: '职位名称', key: 'jobName' , sortable: true },
-                    { title: '工作地点', key: 'workAddr'   },
-                    { title: '薪资'   , key: 'salaryMin' ,sortable: true },
+                    { title: '职位编号' ,key: 'work_id'},
+                    { title: '职位名称', key: 'work_name' , sortable: true },
+                    { title: '工作地点', key: 'work_addr'   },
+                    { title: '工作经验要求', key: 'work_year'   },
+                    { title: '薪资'   , key: 'salary' ,sortable: true },
                     { title: '职位要求', key: 'workMatch',slot:'workMatch'},
                     { title: '我要推荐', key: 'push'   , slot:'push'}
                 ],

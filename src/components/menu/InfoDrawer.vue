@@ -7,39 +7,39 @@
             <div class="demo-drawer-profile">
                 <Row>
                     <Col span="12">
-                        工号: {{rowData.STAFF_ID}}
+                        工号: {{rowData.staff_id}}
                     </Col>
                     <Col span="12">
-                        姓名: {{rowData.STAFF_NAME}}
-                    </Col>
-                </Row>
-                <Row>
-                    <Col span="12">
-                        性别: {{rowData.GENDER}}
-                    </Col>
-                    <Col span="12">
-                        生日: {{rowData.BIRTHDAY}}
+                        姓名: {{rowData.staff_name}}
                     </Col>
                 </Row>
                 <Row>
                     <Col span="12">
-                        邮箱: {{rowData.EMAIL}}
+                        性别: {{rowData.gender}}
                     </Col>
                     <Col span="12">
-                        电话: {{rowData.PHONE}}
-                    </Col>
-                </Row>
-                <Row>
-                    <Col span="12">
-                        工作城市: {{rowData.NATIVE_PLACE}}
-                    </Col>
-                    <Col span="12">
-                        家乡所在省份: {{rowData.ADDRESS}}
+                        生日: {{rowData.birthday}}
                     </Col>
                 </Row>
                 <Row>
                     <Col span="12">
-                        工龄: {{rowData.WORK_AGE}}
+                        邮箱: {{rowData.email}}
+                    </Col>
+                    <Col span="12">
+                        电话: {{rowData.phone}}
+                    </Col>
+                </Row>
+                <Row>
+                    <Col span="12">
+                        工作城市: {{rowData.native_place}}
+                    </Col>
+                    <Col span="12">
+                        家乡所在省份: {{rowData.address}}
+                    </Col>
+                </Row>
+                <Row>
+                    <Col span="12">
+                        工龄: {{rowData.work_age}}
                     </Col>
                 </Row>
             </div>
@@ -48,15 +48,15 @@
             <div class="demo-drawer-profile">
                 <Row>
                     <Col span="12">
-                        所属部门: {{rowData.DEPT_NAME}}
+                        所属部门: {{rowData.departName}}
                     </Col>
                     <Col span="12">
-                        部门上级: {{rowData.DEPT_NAME}}
+                        部门上级: {{rowData.departMgr}}
                     </Col>
                 </Row>
                 <Row>
                     <Col span="12">
-                        职位: {{rowData.JOB_LEVEL_NAME}}
+                        职位: {{rowData.jobLevelName}}
                     </Col>
                 </Row>
                 个人技能:C / C + +, data structures, software engineering, operating systems, computer networks, databases, compiler theory, computer architecture, Microcomputer Principle and Interface Technology, Computer English, Java, ASP, etc.
@@ -66,76 +66,68 @@
             <div class="demo-drawer-profile">
                 <Row>
                     <Col span="12">
-                        婚姻状况: {{rowData.WEDLOCK}}
+                        婚姻状况: {{rowData.wedlock}}
                     </Col>
                     <Col span="12">
-                        毕业院校: {{rowData.SCHOOL}}
-                    </Col>
-                </Row>
-                <Row>
-                    <Col span="12">
-                        政治面貌: {{rowData.POLITIC}}
-                    </Col>
-                    <Col span="12">
-                        入职日期: {{rowData.BEGIN_DATE}}
+                        毕业院校: {{rowData.school}}
                     </Col>
                 </Row>
                 <Row>
                     <Col span="12">
-                        在职状态: {{rowData.WORK_STATE}}
+                        政治面貌: {{rowData.politic}}
                     </Col>
                     <Col span="12">
-                        合同起始日期: {{rowData.BEGIN_CONTRACT}}
+                        入职日期: {{rowData.begin_date}}
                     </Col>
                 </Row>
                 <Row>
                     <Col span="12">
-                        合同结束日期: {{rowData.END_CONTRACT}}
+                        在职状态: {{rowData.work_state}}
                     </Col>
                     <Col span="12">
-                        合同起始日期: {{rowData.BEGIN_CONTRACT}}
+                        合同起始日期: {{rowData.begin_contract}}
+                    </Col>
+                </Row>
+                <Row>
+                    <Col span="12">
+                        合同结束日期: {{rowData.end_contract}}
+                    </Col>
+                    <Col span="12">
+                        合同起始日期: {{rowData.begin_contract}}
                     </Col>
                 </Row>
                 <Divider />
                 <p :style="pStyle">薪资状况</p>
                 <Row>
                     <Col span="12">
-                        基础薪资: {{rowData.BASE_SALARY}}
+                        基础薪资: {{rowData.baseSalary}}
                     </Col>
                     <Col span="12">
-                        生育保险: {{rowData.BIRTH_INSURANCE}}
-                    </Col>
-                </Row>
-                <Row>
-                    <Col span="12">
-                        基础薪资: {{rowData.BASE_SALARY}}
-                    </Col>
-                    <Col span="12">
-                        生育保险: {{rowData.BIRTH_INSURANCE}}
+                        生育保险: {{rowData.birthIns}}
                     </Col>
                 </Row>
                 <Row>
                     <Col span="12">
-                        养老保险: {{rowData.ENDOWMENT_INSURANCE}}
+                        养老保险: {{rowData.endowmentIns}}
                     </Col>
                     <Col span="12">
-                        住房公积金: {{rowData.HOUSING_PROVIDENT_FUND}}
-                    </Col>
-                </Row>
-                <Row>
-                    <Col span="12">
-                        医疗保险: {{rowData.MEDICAL_INSURANCE}}
-                    </Col>
-                    <Col span="12">
-                        失业保险: {{rowData.UNEMP_INSURANCE}}
+                        住房公积金: {{rowData.housingProvidentFund}}
                     </Col>
                 </Row>
                 <Row>
                     <Col span="12">
-                        工伤保险: {{rowData.WORK_INJURY_INSURANCE}}
+                        医疗保险: {{rowData.medicalIns}}
                     </Col>
                     <Col span="12">
-                        个人所得税: {{rowData.OVERTIME_MONEY}}
+                        失业保险: {{rowData.unempIns}}
+                    </Col>
+                </Row>
+                <Row>
+                    <Col span="12">
+                        工伤保险: {{rowData.workInjuryIns}}
+                    </Col>
+                    <Col span="12">
+                        个人所得税: {{rowData.overtimeMoney}}
                     </Col>
                 </Row>
                 <Row>

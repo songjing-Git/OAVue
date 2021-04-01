@@ -93,6 +93,7 @@
                     {title:'项目编号',key:'projectId',align:'center'},
                     {title:'项目名称',key:'projectName',align:'center'},
                     {title:'项目类型',key:'projectType',align:'center'},
+                    {title:'甲方',key:"firstParty",align: 'center'},
                     {title:'项目状态',key:'projectState',slot:'projectState',align:'center'},
                     {title:'立项时间',key:'projectStartDate',align:'center'},
                     {title:'项目工期',key:'projectTime',align:'center'},

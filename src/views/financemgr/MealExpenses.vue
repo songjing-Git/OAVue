@@ -34,6 +34,7 @@
                 <Row>
                     <Col>
                         <Table
+
                             :border="true"
                             :columns="columns"
                             :data="mealDate"
@@ -56,7 +57,7 @@
                                 <Input type="number"></Input>
                             </template>
                             <template slot="date">
-                                <DatePicker/>
+                                <DatePicker />
                             </template>
                             <template slot="code">
                                 <Input></Input>
@@ -64,19 +65,19 @@
                             <template slot-scope="{ row, index }" slot="action">
                                 <Button>费用明细</Button>
                             </template>
-
+                            <slot name="footer" slot="footer">
+                                <Col :xl="{span:7,offset:9}" class="submit">
+                                    <FormItem >
+                                        <Button type="primary" >提交审批</Button>
+                                        <Button style="margin-left: 8px">返回</Button>
+                                    </FormItem>
+                                </Col>
+                            </slot>
                         </Table>
                     </Col>
+
                 </Row>
 
-                <Row>
-                    <Col :xl="{span:8,offset:10}" class="submit">
-                        <FormItem>
-                            <Button type="primary" >提交审批</Button>
-                            <Button style="margin-left: 8px">返回</Button>
-                        </FormItem>
-                    </Col>
-                </Row>
             </Form>
         </Col>
     </Row>
@@ -130,4 +131,8 @@
 </script>
 
 <style scoped>
+    .submit{
+        margin-top: 100px;
+        margin-bottom: 100px;
+    }
 </style>

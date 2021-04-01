@@ -53,19 +53,19 @@
                         <Row>
                             <Col>
                                 <FormItem label="部门编号:" >
-                                    <Input v-model="addDepart.deptId"> </Input>
+                                    <Input v-model="addDepart.departId"> </Input>
                                 </FormItem>
                                 <FormItem label="部门名称:" >
-                                    <Input v-model="addDepart.deptName"> </Input>
+                                    <Input v-model="addDepart.departName"> </Input>
                                 </FormItem>
                                 <FormItem label="部门人数:" >
-                                    <Input v-model="addDepart.deptStaffCount"> </Input>
+                                    <Input v-model="addDepart.departStaffCount"> </Input>
                                 </FormItem>
                                 <FormItem label="部门最大人数:" >
-                                    <Input v-model="addDepart.deptStaffMax"> </Input>
+                                    <Input v-model="addDepart.departStaffMax"> </Input>
                                 </FormItem>
                                 <FormItem label="部门经理:" >
-                                    <Input v-model="addDepart.deptMgr"> </Input>
+                                    <Input v-model="addDepart.departMgr"> </Input>
                                 </FormItem>
                             </Col>
                         </Row>
@@ -133,11 +133,11 @@
                         width: 60,
                         align: 'center'
                     },
-                    { title: '部门编号' ,key:'deptId', align: 'center'},
-                    { title: '部门名称', key: 'deptName' ,sortable: true,align: 'center' },
-                    { title: '部门经理',  key: 'deptMgr' ,align: 'center'},
-                    { title: '部门人数',key: 'deptStaffCount', sortable: true,align: 'center' },
-                    { title: '最大人数',key: 'deptStaffMax',align: 'center'},
+                    { title: '部门编号' ,key:'departId', align: 'center'},
+                    { title: '部门名称', key: 'departName' ,sortable: true,align: 'center' },
+                    { title: '部门经理',  key: 'departMgr' ,align: 'center'},
+                    { title: '部门人数',key: 'departStaffCount', sortable: true,align: 'center' },
+                    { title: '最大人数',key: 'departStaffMax',align: 'center'},
                     { title: '操作' ,key: 'addStaff', slot: 'action',align: 'center'}
                 ],
                 search:{
@@ -154,11 +154,11 @@
                 removeDepart:false,
                 departAddStaff:false,
                 addDepart:{
-                    deptId:'',
-                    deptName:'',
-                    deptStaffCount:'',
-                    deptStaffMax:'',
-                    deptMgr:'',
+                    departId:'',
+                    departName:'',
+                    departStaffCount:'',
+                    departStaffMax:'',
+                    departMgr:'',
                 },
             }
         },

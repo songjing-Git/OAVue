@@ -48,12 +48,12 @@
                         width: 60,
                         align: 'center'
                     },
-                    { title: '员工编号' ,key:'STAFF_ID', align: 'center'},
-                    { title: '员工姓名', key: 'STAFF_NAME' ,sortable: true,align: 'center' },
-                    { title: '性别',  key: 'GENDER' ,align: 'center'},
-                    { title: '在职状态',key: 'WORK_STATE',align: 'center'},
-                    { title: '联系方式' , key: 'PHONE',align: 'center'},
-                    { title: '职位等级' , key: 'JOB_LEVEL_NAME',align: 'center'},
+                    { title: '员工编号' ,key:'staff_id', align: 'center'},
+                    { title: '员工姓名', key: 'staff_name' ,sortable: true,align: 'center' },
+                    { title: '性别',  key: 'gender' ,align: 'center'},
+                    { title: '在职状态',key: 'work_state',align: 'center'},
+                    { title: '联系方式' , key: 'phone',align: 'center'},
+                    { title: '职位等级' , key: 'jobLevelName',align: 'center'},
 
                 ],
                 current:1,

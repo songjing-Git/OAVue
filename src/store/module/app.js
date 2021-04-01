@@ -29,7 +29,6 @@ export default {
                     tagList.splice(i,1)
                 }
             }
-            console.log(tagList)
             state.tagNavList = tagList
             setTagNavListInLocalstorage([...tagList])
         },

@@ -40,13 +40,13 @@
                         <Row>
                             <Col :xl="{offset:4,span:5}">
                                 <FormItem label="转出部门:" prop="OutDept" v-if="formValidate.ChangeType=='Post'?false:true">
-                                    <Input     disabled></Input>
+                                    <Input   :value="this.$store.state.departName"  disabled></Input>
                                 </FormItem>
                                 <FormItem label="转出岗位:" prop="OutJob" v-if="formValidate.ChangeType=='Dept'?false:true">
-                                    <Input   placeholder=""  disabled></Input>
+                                    <Input   value="转出岗位"  disabled></Input>
                                 </FormItem>
                                 <FormItem label="部门负责人:" prop="OutDeptMgr">
-                                    <Input   placeholder=""  disabled></Input>
+                                    <Input   value="部门负责人"  disabled></Input>
                                 </FormItem>
 <!--                                <FormItem label="Date">-->
 <!--                                    <Row>-->
@@ -146,6 +146,8 @@
 </template>
 
 <script>
+    import {mapState} from "vuex";
+
     export default {
         name: "InterMob",
         props: {},
@@ -194,6 +196,11 @@
             }
         },
         computed:{
+            getUserDepartName(){
+                return this.$store.departName
+            }
+
+
         },
         methods: {
             handleSubmit (name) {
@@ -203,6 +210,8 @@
                         if (this.steps>4) {
                             this.steps=0
                         }
+                        console.log(this.$store.state)
+                        console.log(this.$store.state.user.departName)
                         this.$router.push('Success')
                         this.$Message.success('提交成功!');
                     } else {
@@ -211,7 +220,6 @@
                 })
             },
             handleReset (name) {
-
                 this.$refs[name].resetFields();
             },
         },
