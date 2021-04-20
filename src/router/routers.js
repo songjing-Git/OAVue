@@ -1,4 +1,5 @@
 import Home from "../views/Home";
+import ParentsView from "../views/ParentsView";
 
 export default [
     {
@@ -173,7 +174,7 @@ export default [
                     }*/
                 ]
             },
-            {
+          /*  {
                 path: '/ProveStamp',
                 name: 'ProveStamp',
                 meta: {
@@ -199,7 +200,7 @@ export default [
                         }
                     }
                 ]
-            },
+            },*/
             {
                 path: '/LaborRel',
                 name: 'LaborRel',
@@ -301,7 +302,7 @@ export default [
             }*/
         ]
     },
-    {
+   /* {
         path: '/InfoMgr',
         name: 'InfoMgr',
         meta: {
@@ -327,7 +328,7 @@ export default [
                 }
             },
         ]
-    },
+    },*/
 
     {
         path: '/AssistantMgr',
@@ -384,7 +385,46 @@ export default [
                     title: '项目任务',
                     icon: 'md-infinite'
                 },
-                component:()=>import('../views/projectmgr/ProjectTask')
+                /*component:()=>import('../views/projectmgr/ProjectTask')*/
+                component:()=>import('../views/ParentsView'),
+                children: [
+                    {
+                        path: '/productDemand',
+                        name: 'productDemand',
+                        meta: {
+                            title: '产品需求',
+                            icon: ''
+                        },
+                        component: () => import('../views/projectmgr/ProductDemand')
+                    },
+                    {
+                        path: '/UIDesign',
+                        name: 'UIDesign',
+                        meta: {
+                            title: 'UI设计',
+                            icon: ''
+                        },
+                        component: () => import('../views/projectmgr/UI')
+                    },
+                    {
+                        path: '/ProjectTest',
+                        name: 'ProjectTest',
+                        meta: {
+                            title: '项目测试',
+                            icon: ''
+                        },
+                        component: () => import('../views/projectmgr/ProjectTask')
+                    },
+                    {
+                        path: '/ProjectDeployment',
+                        name: 'ProjectDeployment',
+                        meta: {
+                            title: '项目部署',
+                            icon: ''
+                        },
+                        component: () => import('../views/projectmgr/ProjectTask')
+                    }
+                ]
             },
         ]
     },

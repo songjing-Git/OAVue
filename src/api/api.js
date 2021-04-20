@@ -1,5 +1,67 @@
-import {Get, Post, Put} from "../api/index"
+import {Get, Post, Put,Delete} from "../api/index"
 export default {
+
+    sendRmbApprove(param){
+      return Post(
+          "send/reimbursement",
+          param
+      )
+    },
+
+    /**
+     * 内推政策
+     * @returns {Promise | Promise<unknown>}
+     */
+    policyPush(){
+        return Post(
+            "text/policyPush"
+        )
+    },
+
+
+    /**
+     * 获取绩效排行榜
+     * @returns {Promise | Promise<unknown>}
+     */
+    performanceList(){
+        return Get(
+            "performance/performanceList",
+        )
+    },
+
+
+    /**
+     * 内部调动接口
+     * @param param
+     * @returns {Promise<unknown>}
+     */
+    updateStaffInfo(param) {
+        return Put(
+            "staff/updateStaff",
+            param
+        )
+    },
+
+    /**
+     * 内推职位邮件
+     * @param File
+     * @returns {Promise<unknown>}
+     */
+    pushSend(File){
+        return Post(
+            "pushSend",
+            File
+        )
+    },
+
+    /**
+     *
+     */
+    removeDepart(id){
+        return Delete(
+            "depart/removeDepart/"+`${id}`
+        )
+    },
     /**
      * 登录接口
      * @param username

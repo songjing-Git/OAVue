@@ -41,8 +41,7 @@
                             <Modal
                                 v-model="notView"
                                 title="任职要求"
-                                @on-ok="ok"
-                                @on-cancel="cancel">
+                            >
                                 个人技能:
                                 <p>C / C + +, data structures, software engineering,</p>
                                 <p>operating systems, computer networks, databases, compiler theory,</p>
@@ -58,7 +57,10 @@
                                 <Upload
                                     multiple
                                     type="drag"
-                                    action="//jsonplaceholder.typicode.com/posts/">
+                                    :format="['doc','pdf','docx']"
+                                    :max-size="20480"
+                                    :before-upload="handleUpload"
+                                    action="http://localhost:8084/pushSend">
                                     <div style="padding: 20px 0">
                                         <Icon type="ios-cloud-upload" size="52" style="color: #3399ff"></Icon>
                                         <p>请上传被推荐人的简历</p>
@@ -81,6 +83,26 @@
                     </Table>
             </TabPane>
             <TabPane label="内推政策" name="name2">
+                <div style="text-align: center">
+                <Row>
+                    <Col >
+                        <h1>{{text.textTitle}}</h1>
+                    </Col>
+                    <Col ></Col>
+                    <Col >
+                        {{text.textAuthor}}<p/>
+                    </Col>
+                    <Col>
+                        <span>{{text.textContext}}</span><p></p>
+                    </Col>
+                    <Col >
+                        {{text.textValidDate}}-{{text.textExpireDate}}
+                    </Col>
+                </Row>
+                </div>
+
+
+
 
             </TabPane>
         </Tabs>
@@ -96,6 +118,8 @@
         props: {},
         data () {
             return {
+                file: null,
+                loadingStatus: false,
                 tableDate: {
                     total:0,
                     records:[],
@@ -116,7 +140,13 @@
                     pageSize:10,
                     current:1,
                 },
-
+                text:{
+                    textAuthor:'',
+                    textContext:'',
+                    textExpireDate:'',
+                    textTitle:'',
+                    textValidDate:''
+                },
 
                 notView:false,
                 notPush:false,
@@ -132,6 +162,14 @@
                 api.getWorkInfo().then(
                     resolve=>{
                         vm.tableDate=resolve
+                    },
+                    rej=>{
+                        console.log(rej)
+                    }
+                )
+                api.policyPush().then(
+                    resolve=>{
+                        vm.text=resolve
                     },
                     rej=>{
                         console.log(rej)
@@ -160,11 +198,16 @@
                     }
                 )
             },
+            //上传成功
+            handleUpload (file) {
+                this.file = file;
+                return false;
+            },
             ok () {
-                this.$Message.info('Clicked ok');
+
             },
             cancel () {
-                this.$Message.info('Clicked cancel');
+
             },
             updatePushCurrentPage(currentPage){
                 this.search.current=currentPage

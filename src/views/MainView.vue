@@ -1,68 +1,88 @@
 <template>
     <div>
-        <!--<Row>
-            <Col :xl="11">
-                <Carousel v-model="value" loop>
-                    <CarouselItem>
-                        <img src="https://static.runoob.com/images/mix/img_nature_wide.jpg" >
-                    </CarouselItem>
-                    <CarouselItem>
-                        <img src="https://static.runoob.com/images/mix/img_nature_wide.jpg" >
-                    </CarouselItem>
-                    <CarouselItem>
-                        <img src="https://static.runoob.com/images/mix/img_mountains_wide.jpg" >
-                    </CarouselItem>
-                    <CarouselItem>
-                        <img src="https://static.runoob.com/images/mix/img_nature_wide.jpg" >
-                    </CarouselItem>
-                </Carousel>
-            </Col>
-            <Col :xl="{offset:1,span:8}">
-                <carder></carder>
-            </Col>
-        </Row>
-        <Row>
-            <Col>
-                <Col :xl="{offset:3,span:10}">
-                    <i-circle :percent="80" :size="280" :stroke-width="10" :trail-width="10"  stroke-linecap="square">
-                        <span class="demo-Circle-inner" style="font-size:24px">80%</span>
-                    </i-circle>
-                </Col>
-                <Col :xl="{offset:3}">
-                    <i-circle :percent="100" :size="280" :stroke-width="10" :trail-width="10"  stroke-linecap="square">
-                        <Icon type="ios-checkmark" size="100" style="color:#5cb85c"></Icon>
-                        <Icon type="ios-close" size="100" style="color:#ff5500"></Icon>
-                    </i-circle>
-                </Col>
-            </Col>
-        </Row>-->
-        <Row>
-            <Col>
-                <List item-layout="vertical">
-                    <ListItem v-for="item in data" :key="item.title">
-                        <ListItemMeta :avatar="item.avatar" :title="item.title" :description="item.description" />
-                        {{ item.content }}
-                        <template slot="action">
-                            <li>
-                                <Icon type="ios-star-outline" /> 123
-                            </li>
-                            <li>
-                                <Icon type="ios-thumbs-up-outline" /> 234
-                            </li>
-                            <li>
-                                <Icon type="ios-chatbubbles-outline" /> 345
-                            </li>
-                        </template>
-                        <template slot="extra">
-                            <img src="https://dev-file.iviewui.com/5wxHCQMUyrauMCGSVEYVxHR5JmvS7DpH/large" style="width: 280px">
-                        </template>
-                    </ListItem>
-                </List>
-            </Col>
-        </Row>
-        <Row>
-            <Col>
+        <Row :gutter="20">
+            <Col :xl="{span:18}">
+                <Row :gutter="20">
 
+                    <Col :xl="{span:10}">
+                        <Card>
+                            <p slot="title">个人信息</p>
+                            <div class="main_break_img">
+                                <Avatar class="main_img" size="100">宋</Avatar>
+                            </div>
+                            <div>
+                                姓名:宋京
+                            </div>
+                            <div>
+                                所属部门:研发部
+                            </div>
+                            <div>
+                                本月工作时长:30小时
+                            </div>
+                            <div>
+                                岗位:java开发工程师
+                            </div>
+                        </Card>
+                    </Col>
+                    <Col :xl="{span:14}">
+                        <Card>
+                            <p slot="title">公告</p>
+                            <Collapse  accordion simple>
+                                <Panel name="1">
+                                    史蒂夫·乔布斯
+                                    <p slot="content">史蒂夫·乔布斯（Steve Jobs），1955年2月24日生于美国加利福尼亚州旧金山，美国发明家、企业家、美国苹果公司联合创办人。</p>
+                                </Panel>
+                                <Panel name="2">
+                                    斯蒂夫·盖瑞·沃兹尼亚克
+                                    <p slot="content">斯蒂夫·盖瑞·沃兹尼亚克（Stephen Gary Wozniak），美国电脑工程师，曾与史蒂夫·乔布斯合伙创立苹果电脑（今之苹果公司）。斯蒂夫·盖瑞·沃兹尼亚克曾就读于美国科罗拉多大学，后转学入美国著名高等学府加州大学伯克利分校（UC Berkeley）并获得电机工程及计算机（EECS）本科学位（1987年）。</p>
+                                </Panel>
+                                <Panel name="3">
+                                    乔纳森·伊夫
+                                    <p slot="content">乔纳森·伊夫是一位工业设计师，现任Apple公司设计师兼资深副总裁，英国爵士。他曾参与设计了iPod，iMac，iPhone，iPad等众多苹果产品。除了乔布斯，他是对苹果那些著名的产品最有影响力的人。</p>
+                                </Panel>
+                                <Panel name="4">
+                                    史蒂夫·乔布斯
+                                    <p slot="content">史蒂夫·乔布斯（Steve Jobs），1955年2月24日生于美国加利福尼亚州旧金山，美国发明家、企业家、美国苹果公司联合创办人。</p>
+                                </Panel>
+                                <Panel name="5">
+                                    斯蒂夫·盖瑞·沃兹尼亚克
+                                    <p slot="content">斯蒂夫·盖瑞·沃兹尼亚克（Stephen Gary Wozniak），美国电脑工程师，曾与史蒂夫·乔布斯合伙创立苹果电脑（今之苹果公司）。斯蒂夫·盖瑞·沃兹尼亚克曾就读于美国科罗拉多大学，后转学入美国著名高等学府加州大学伯克利分校（UC Berkeley）并获得电机工程及计算机（EECS）本科学位（1987年）。</p>
+                                </Panel>
+                                <Panel name="6">
+                                    乔纳森·伊夫
+                                    <p slot="content">乔纳森·伊夫是一位工业设计师，现任Apple公司设计师兼资深副总裁，英国爵士。他曾参与设计了iPod，iMac，iPhone，iPad等众多苹果产品。除了乔布斯，他是对苹果那些著名的产品最有影响力的人。</p>
+                                </Panel>
+                            </Collapse>
+                        </Card>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col >
+                        <div class="main_gutter">
+                            <Card>
+                                <p slot="title">公司盈亏图</p>
+                                <div id="myChart" :style="{width:'900px', height:'500px'}"></div>
+                                <div id="chart2" :style="{width:'900px', height:'500px'}"></div>
+                            </Card>
+                        </div>
+
+                    </Col>
+                </Row>
+            </Col>
+
+            <Col :xl="{span:6}">
+                <Card>
+                    <p slot="title">绩效排行榜top10</p>
+                    <List item-layout="vertical">
+                        <ListItem v-for="item in performanceList" :key="item.staff_id">
+                            <ListItemMeta :avatar="item.avatar" :title="item.staffName" :description="item.description" />
+                            绩效考核分:{{item.Performance_score}}
+                        </ListItem>
+                        <template slot="extra">
+
+                        </template>
+                    </List>
+                </Card>
             </Col>
         </Row>
          <Divider orientation="center" :dashed="true">
@@ -75,6 +95,7 @@
 </template>
 
 <script>
+    import api from "../api/api";
 
     export default {
         name: "MainView",
@@ -82,53 +103,86 @@
         props: {},
         data() {
             return {
-                value:0,
-                data: [
-                    {
-                        title: 'This is title 1',
-                        description: 'This is description, this is description, this is description.',
-                        avatar: 'https://dev-file.iviewui.com/userinfoPDvn9gKWYihR24SpgC319vXY8qniCqj4/avatar',
-                        content: 'This is the content, this is the content, this is the content, this is the content.'
-                    },
-                    {
-                        title: 'This is title 2',
-                        description: 'This is description, this is description, this is description.',
-                        avatar: 'https://dev-file.iviewui.com/userinfoPDvn9gKWYihR24SpgC319vXY8qniCqj4/avatar',
-                        content: 'This is the content, this is the content, this is the content, this is the content.'
-                    },
-                    {
-                        title: 'This is title 3',
-                        description: 'This is description, this is description, this is description.',
-                        avatar: 'https://dev-file.iviewui.com/userinfoPDvn9gKWYihR24SpgC319vXY8qniCqj4/avatar',
-                        content: 'This is the content, this is the content, this is the content, this is the content.'
-                    },
-                    {
-                        title: 'This is title 4',
-                        description: 'This is description, this is description, this is description.',
-                        avatar: 'https://dev-file.iviewui.com/userinfoPDvn9gKWYihR24SpgC319vXY8qniCqj4/avatar',
-                        content: 'This is the content, this is the content, this is the content, this is the content.'
-                    },
-                    {
-                        title: 'This is title 5',
-                        description: 'This is description, this is description, this is description.',
-                        avatar: 'https://dev-file.iviewui.com/userinfoPDvn9gKWYihR24SpgC319vXY8qniCqj4/avatar',
-                        content: 'This is the content, this is the content, this is the content, this is the content.'
-                    },
-                    {
-                        title: 'This is title 6',
-                        description: 'This is description, this is description, this is description.',
-                        avatar: 'https://dev-file.iviewui.com/userinfoPDvn9gKWYihR24SpgC319vXY8qniCqj4/avatar',
-                        content: 'This is the content, this is the content, this is the content, this is the content.'
-                    }
-                ]
+                performanceList:[],
+
             }
         },
+
+        beforeRouteEnter(to,from,next){
+            next(vm => {
+                api.performanceList().then(
+                    resolve=>{
+                        vm.performanceList=resolve
+                    },
+                    rej=>{
+                        alert(rej)
+                    }
+                )
+            })
+        },
         computed: {},
-        methods: {},
-        watch: {}
+        methods: {
+
+            drawLine(){
+                // 基于准备好的dom，初始化echarts实例
+                let myChart = this.$echarts.init(document.getElementById('myChart'))
+                // 绘制图表
+                myChart.setOption({
+                    title: { text: '季度盈利图' },
+                    tooltip: {},
+                    xAxis: {
+                        data: ["第一季度","第二季度","第三季度","第四季度"]
+                    },
+                    yAxis: {},
+                    series: [{
+                        name: '盈利',
+                        type: 'bar',
+                        data: [5, 20, 36, 15]
+                    }]
+                });
+            },
+            drawLine2(){
+                // 基于准备好的dom，初始化echarts实例
+                let myChart = this.$echarts.init(document.getElementById('chart2'))
+                // 绘制图表
+                myChart.setOption({
+                    title: { text: '季度支出图' },
+                    tooltip: {},
+                    xAxis: {
+                        data: ["第一季度","第二季度","第三季度","第四季度"]
+                    },
+                    yAxis: {},
+                    series: [{
+                        name: '支出',
+                        type: 'bar',
+                        data: [5, 20, 36, 15]
+                    }]
+                });
+            }
+        },
+        watch: {},
+        mounted() {
+            this.drawLine();
+            this.drawLine2()
+        }
     }
 </script>
 
 <style scoped>
+    .main_break_img{
 
+        margin-left: 150px;
+        width: 200px;
+        height: 200px;
+        background-image: url("../assets/logo.png");
+    }
+    .main_img{
+        margin-top: 100px;
+        margin-left: 50px;
+        color: #f56a00;
+        background-color: #fde3cf;
+    }
+    .main_gutter{
+        margin-top: 20px;
+    }
 </style>

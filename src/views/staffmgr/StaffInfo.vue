@@ -48,7 +48,7 @@
             </template>
 
             <slot name="header" slot="header">
-                <Button type="error"  @click="isAddStaff = true" style="margin-left: 90%">新增</Button>
+                <Button type="error"  @click="isAddStaff = true" style="margin-left: 93%">新增</Button>
                 <Modal
                     ref="addStaffSubmit"
                     :width="780"
@@ -60,7 +60,7 @@
 
 
                 </Modal>
-                <Button type="error"  @click="isUpdateStaff=true">修改</Button>
+                <!--<Button type="error"  @click="isUpdateStaff=true">修改</Button>
                 <Modal
                     v-model="isUpdateStaff"
                     title="修改员工"
@@ -68,7 +68,7 @@
                     @on-cancel="cancel">
 
 
-                </Modal>
+                </Modal>-->
             </slot>
             <slot name="footer" slot="footer">
                 <Page :total="tableDate.total"
@@ -112,7 +112,7 @@
                     { title: '员工姓名', key: 'staff_name' ,sortable: true,align: 'center' },
                     { title: '性别',  key: 'gender' ,align: 'center'},
                     { title: '生日',key: 'birthday', sortable: true,align: 'center' },
-                    { title: '在职状态',key: 'work_state',align: 'center'},
+                    { title: '在职状态',key: 'workStateName',align: 'center'},
                     { title: '联系方式' , key: 'phone',align: 'center'},
                     { title: '所属部门' , key: 'departName' ,align: 'center'},
                     { title: '职位等级' , key: 'jobLevelName',align: 'center'},

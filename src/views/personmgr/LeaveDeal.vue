@@ -2,7 +2,7 @@
     <div>
         <Row>
             <Col>
-                <Form ref="formValidate"  :label-width="100">
+                <Form ref="formDate"  :label-width="100">
                         <Row>
                             <Col>
                                 <FormItem label="填报类型:" prop="ChangeType">
@@ -25,7 +25,7 @@
                                 <FormItem label="员工职级:" prop="StaffCode">
                                     <Input ></Input>
                                 </FormItem>
-                                <FormItem label="所属公司:" prop="StaffCode">
+                                <FormItem label="联系电话:" prop="StaffCode">
                                     <Input ></Input>
                                 </FormItem>
                             </Col>
@@ -34,13 +34,11 @@
                                     <FormItem label="员工姓名:" prop="StaffCode">
                                         <Input ></Input>
                                     </FormItem>
-                                    <FormItem label="部门经理:" prop="StaffCode">
-                                        <Input ></Input>
-                                    </FormItem>
+
                                     <FormItem label="员工入职日期:" prop="StaffCode">
                                         <Input ></Input>
                                     </FormItem>
-                                    <FormItem label="期望离职日期:" prop="StaffCode">
+                                    <FormItem label="预计离职日期:" prop="StaffCode">
                                         <Input ></Input>
                                     </FormItem>
                                 </Col>
@@ -60,13 +58,8 @@
                                     </CheckboxGroup>
                                 </FormItem>
 
-                                <FormItem label="填报类型:" prop="ChangeType">
-                                    <RadioGroup >
-                                        <Radio label="MySelf">本人填报</Radio>
-                                        <Radio label="Others">代理填报</Radio>
-                                    </RadioGroup>
-                                </FormItem>
-                                <FormItem label="Desc" prop="desc">
+
+                                <FormItem label="建议" prop="desc">
                                     <Input  type="textarea" :autosize="{minRows: 2,maxRows: 5}" placeholder="Enter something..."></Input>
                                 </FormItem>
                             </Col>
@@ -91,11 +84,6 @@
                                         <p>Click or drag files here to upload</p>
                                     </div>
                                 </Upload>
-                            </Col>
-                            <Col>
-                                <Divider orientation="left">
-                                    <p>您的联系方式</p>
-                                </Divider>
                             </Col>
                         </Row>
                         <Row>

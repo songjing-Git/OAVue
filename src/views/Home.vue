@@ -3,14 +3,16 @@
         <Sider hide-trigger collapsible :width="200" :collapsed-width="0" v-model="collapsed" class="left-side" :style="{overflow: 'hidden'}">
             <side-menu accordion ref="sideMenu" :active-name="$route.name" :collapsed="collapsed" @on-select="turnToPage" :menu-list="menuList">
                 <div class="logo-con">
-                    <Avatar style="background-color: #87d068" :src="userAvator" icon="ios-person"  size="50" />
+                    <!--<Avatar style="background-color: #87d068" :src="userAvator" icon="ios-person"  size="50" />-->
+                    <h1 style="color: white">OA办公系统</h1>
                 </div>
             </side-menu>
         </Sider>
         <Layout>
             <Header class="header-con">
                 <header-bar :collapsed="collapsed" @on-coll-change="handleCollapsedChange">
-                    <user :user-avator="userAvator"/>
+                    <user  :user-avator="userAvator"/>
+                    <Avatar class="avater" >宋</Avatar>
                     <full-screen v-model="isFullscreen" style="margin-right: 10px;"/>
                 </header-bar>
             </Header>
@@ -33,7 +35,7 @@
                     </Content>
                 </Layout>
             </Content>
-            
+
         </Layout>
     </Layout>
 </template>
@@ -222,5 +224,9 @@
     .ivu-select-dropdown.ivu-dropdown-transfer {
         max-height: 400px;
     }
-
+    .avater{
+        margin-top: 15px;
+        color: #f56a00;
+        background-color: #fde3cf;
+    }
 </style>

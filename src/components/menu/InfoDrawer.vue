@@ -151,7 +151,7 @@
                 value4: false,
                 pStyle: {
                     fontSize: '16px',
-                    color: 'rgba(25,20,10,0.1)',
+                    color: 'rgba(5,20,10,0.85)',
                     lineHeight: '24px',
                     display: 'block',
                     marginBottom: '16px'

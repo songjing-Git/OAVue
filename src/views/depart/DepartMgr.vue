@@ -31,9 +31,7 @@
             <template slot-scope="{ row, index }" slot="action">
                 <Button type="primary" size="small"  @click="departAdd()">添加部门员工</Button>
 
-
-
-                <Button type="error" size="small" @click="removeDepart=true">删除</Button>
+                <Button type="error" size="small" @click="getDepartId(row)">删除</Button>
 
                 <Button type="error" size="small" @click="isUpdateDepart=true">修改</Button>
             </template>
@@ -82,10 +80,10 @@
                 </Modal>
                 <Modal
                     v-model="removeDepart"
-                    title="删除员工"
-                    @on-ok="departAddStaffOK"
+                    title="删除部门"
+                    @on-ok="deleteDepart()"
                     @on-cancel="cancel">
-
+                    <span>是否删除该部门</span>
                 </Modal>
                 <Modal
                     v-model="isUpdateDepart"
@@ -160,6 +158,7 @@
                     departStaffMax:'',
                     departMgr:'',
                 },
+                departId:null,
             }
         },
         beforeRouteEnter(to,from,next){
@@ -215,11 +214,25 @@
                     }
                 )
             },
-            /**
-             * 添加员工提交的方法
-             */
             departAddStaffOK(){
 
+            },
+            getDepartId(row){
+                this.removeDepart=true
+                this.departId=row.departId
+            },
+            /**
+             * 删除部门按钮
+             */
+            deleteDepart(){
+                api.removeDepart(this.departId).then(
+                    res=>{
+                        alert("删除成功")
+                    },
+                    rej=>{
+                        alert("删除失败")
+                    }
+                )
             },
             cancel () {
                 this.$Message.info('取消成功');
