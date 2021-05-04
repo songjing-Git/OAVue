@@ -1,16 +1,17 @@
-import routers from "../../router/routers";
+import startRouter from "../../router/routers"
+
 import {getMenuByRouter,getTagNavListFromLocalstorage,
     setTagNavListInLocalstorage,getRouteTitleHandled,
-    routeHasExist,getHomeRoute,getBreadCrumbList} from "../../utils/util";
+    routeHasExist,getHomeRoute,getBreadCrumbList,arrayMarge} from "../../utils/util";
 
 export default {
     state: {
         breadCrumbList: [],
         tagNavList: [],
-        homeRoute: getHomeRoute(routers, "main"),
+        homeRoute: getHomeRoute(startRouter, "main"),
     },
     getters: {
-        menuList: (state, getters, rootState) => getMenuByRouter(routers, rootState.user.access),
+        menuList: (state, getters, rootState) => getMenuByRouter(startRouter, rootState.user.access),
     },
     mutations:{
         setTagNavList (state, list) {
@@ -46,5 +47,8 @@ export default {
         setBreadCrumb (state, route) {
             state.breadCrumbList = getBreadCrumbList(route, state.homeRoute)
         },
-    }
+    },
+    action:{
+    },
+
 }

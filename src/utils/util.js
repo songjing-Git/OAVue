@@ -1,5 +1,21 @@
+import Home from "../views/Home";
+
 export const TOKEN_KEY = 'token'
 import Cookies from 'js-cookie'
+import fa from "element-ui/src/locale/lang/fa";
+
+
+
+export const arrayMarge=(arr1,arr2)=>{
+    console.log(arr1)
+    console.log(arr2)
+    for(const i in arr2)
+    {
+        arr1.push(arr2[i]);
+    }
+    return arr1
+}
+
 
 /**
  * @param {Array} list 通过路由列表得到菜单列表

@@ -44,6 +44,22 @@ error => {
         }
     }
 )
+/**
+ * 封装get请求
+ * songjing@asiainfo
+ */
+export function GetBlob(url, params){
+    return new Promise((resolve, reject) =>{
+        axios.get(url, {
+            responseType: 'arraybuffer',
+            params: params,
+        }).then(res => {
+            resolve(res.data);
+        }).catch(err =>{
+            reject(err.data)
+        })
+    });
+}
 
 /**
  * 封装get请求
@@ -60,6 +76,8 @@ export function Get(url, params){
         })
     });
 }
+
+
 
 /**
  * 封装post请求
@@ -103,4 +121,21 @@ export function Delete(url ,data) {
             reject(err.data)
         })
     } )
+}
+
+export async function awaitPost(url ,data) {
+    return await new Promise((resolve, reject) => {
+        axios.post(url, {
+                data: data
+            }
+        ).then(
+            res => {
+                resolve(res.data)
+            }
+        ).catch(
+            err => {
+                reject(err.data)
+            }
+        )
+    })
 }

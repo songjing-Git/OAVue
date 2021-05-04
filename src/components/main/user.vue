@@ -1,7 +1,7 @@
 <template>
     <div class="user-avator-dropdown">
         <Dropdown @on-click="handleClick">
-            <Avatar :src="userAvator"/>
+            <Avatar class="avater" >{{getStaffName}}</Avatar>
             <Icon :size="18" type="md-arrow-dropdown"></Icon>
             <DropdownMenu slot="list">
                 <DropdownItem name="logout">退出登录</DropdownItem>
@@ -22,7 +22,11 @@
         data() {
             return {}
         },
-        computed: {},
+        computed: {
+            getStaffName () {
+                return this.$store.state.user.user.staffName
+            },
+        },
         methods: {
             handleClick (name) {
                 switch (name) {
@@ -45,5 +49,9 @@
         cursor: pointer;
         display: inline-block;
         vertical-align: middle;
+    }
+    .avater{
+        color: #f56a00;
+        background-color: #fde3cf;
     }
 </style>

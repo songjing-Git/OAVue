@@ -11,6 +11,7 @@ import * as echarts from 'echarts'
 import iView from "view-design"
 import 'view-design/dist/styles/iview.css'
 
+
 Vue.use(iView)
 Vue.use(Vuex)
 Vue.use(elementUI)
@@ -23,5 +24,6 @@ new Vue({
     router, store,
     axios,
     components:{App},
-    template:'<App></App>'
+    template:'<App></App>',
+
 })

@@ -1,6 +1,6 @@
 export default {
     state: {
-
+        user:{
             staffId:0,//编号
             staffName:'',//姓名
             age:0,
@@ -26,14 +26,14 @@ export default {
             access: '',//权限等级
             HEAD_PHOTO:'',//头像
             salaryId:0,
-
-
+        },
     },
+
     getters:{
     },
     mutations:{
         setUserInfo (state,userInfo) {
-            state =userInfo
+            state.user ={...userInfo}
         }
     },
     actions:{

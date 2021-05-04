@@ -1,6 +1,7 @@
 <template>
-    <div class="login">
-        <Card class="form">
+    <div class="contra">
+    <Col class="login" :xl="{offset:9,span:6}">
+        <Card >
             <Form  label-position="left" :label-width="60">
             <Row>
                 <Col :xl="{offset:3,span:20}">
@@ -21,6 +22,20 @@
                 </Col>
             </Row>
             <Row>
+                <Col :xl="16">
+                    <FormItem>
+                        <Col :xl="22">
+                            <Input type="text" placeholder="请输入验证码"  >
+                                <span slot="prepend">验证码:</span>
+                            </Input>
+                        </Col>
+                    </FormItem>
+                </Col>
+                <Col :xl="8">
+                    <img :src="imgCode"/>
+                </Col>
+                </Row>
+            <Row>
                 <Col>
                     <FormItem>
                         <Button size="small" type="info">忘记密码?</Button>
@@ -28,6 +43,7 @@
                     </FormItem>
                 </Col>
             </Row>
+
             <Row>
                 <Col :xl="20">
                     <FormItem>
@@ -35,27 +51,21 @@
                             <div>登录</div>
                         </Button>
                     </FormItem>
-                </Col>
-
-            </Row>
-            <Row>
-                <Col :xl="20">
-                    <FormItem>
-                        <Button type="primary" long>
-                            <div >以管理员身份登录</div>
-                        </Button>
-                    </FormItem>
 
                 </Col>
             </Row>
             </Form>
         </Card>
+    </Col>
     </div>
 </template>
 
 <script>
     import api from "../api/api";
     import store from "../store";
+    import routers from "../router/routers";
+    import {menuRouterHandle} from "../utils/util";
+    import {router} from "../router";
 
     export default {
         name: "Login",
@@ -65,10 +75,34 @@
                 username:'songjing3',
                 password:'songjing3!',
                 single:false,
-                result:""
+                result:"",
+                imgCode:"",
+
             }
         },
-        computed: {},
+        computed: {
+            /*getMenu(){
+                return this.$store.state.routersVuex.routers
+            },*/
+        },
+        beforeRouteEnter(to,from,next){
+            next(vm => {
+                // 通过 `vm` 访问组件实例
+                api.getImgCode().then(
+                    res=>{
+                        /*vm.imgCode=res*/
+                        const img = btoa(
+                            new Uint8Array(res).reduce(
+                                (data, byte) => data + String.fromCharCode(byte), "")
+                        );
+                        vm.imgCode = "data:image/png;base64," + img;
+                    },
+                    rej=>{
+                        console.log(rej)
+                    }
+                )
+            })
+        },
         methods: {
             onSubmit(){
 
@@ -80,15 +114,7 @@
                 //     }
                 // })
                 //查询登录员工的信息
-
-                api.getStaffInfoByName(this.username).then(res=>{
-                    if (res){
-                        this.$store.user=res
-                        this.$store.dispatch('setUserInfo',res)
-                    }
-                    console.log(this.$store.user.departName)
-                    console.log(this.$store.user)
-                })
+                sessionStorage.setItem("username",this.username)
                 this.$router.push("/home")
 
             }
@@ -102,15 +128,11 @@
 </script>
 
 <style scoped>
-    .login{
-        padding-top: 5%;
-        height: 100%;
-        background-image: url('../assets/backgroup.png');
+    .contra{
+        background-color: #adc6ff;
     }
-    .form{
-        width: 20%;
-        height: 50%;
-        margin-left: 40%;
+    .login{
+        padding-top: 10%;
 
     }
 </style>

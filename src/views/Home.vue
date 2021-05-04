@@ -12,7 +12,7 @@
             <Header class="header-con">
                 <header-bar :collapsed="collapsed" @on-coll-change="handleCollapsedChange">
                     <user  :user-avator="userAvator"/>
-                    <Avatar class="avater" >宋</Avatar>
+
                     <full-screen v-model="isFullscreen" style="margin-right: 10px;"/>
                 </header-bar>
             </Header>
@@ -41,7 +41,8 @@
 </template>
 
 <script>
-    import {getNewTagList, getNextRoute, routeEqual} from '../utils/util'
+    import {filterAsyncRouter,buildMenuTree} from "../router/index";
+    import {getNewTagList, getNextRoute, menuRouterHandle, routeEqual} from '../utils/util'
     import SideMenu from "../components/main/side-menu";
     import HeaderBar from "../components/main/header-bar";
     import TagsNav from "../components/main/tags-nav";
@@ -50,6 +51,8 @@
     import ParentsView from "./ParentsView";
     import { mapMutations, mapActions, mapGetters } from 'vuex'
     import CustomBreadCrumb from "../components/main/custom-bread-crumb";
+    import api from "../api/api";
+    import {router} from "../router";
     export default {
         name: "Home",
         components: {CustomBreadCrumb, ParentsView, FullScreen, User, TagsNav, HeaderBar,  SideMenu},
@@ -57,10 +60,34 @@
         data() {
             return {
                 collapsed: false,
-                isFullscreen: false
+                isFullscreen: false,
+
             }
         },
+        beforeRouteEnter(to,from,next) {
+            next(vm => {
+                api.getStaffInfoByName(sessionStorage.getItem("username")).then(res=>{
+                        vm.$store.dispatch('setUserInfo',res)
+                })
+                /*api.getRouterMenuList().then(
+                    res=>{
+                        let menuList= buildMenuTree(res,"0")
+                        sessionStorage.setItem("DynamicRouter",JSON.stringify(menuList))
+                        router.options.routes=menuList
+                        router.addRoutes(menuList)
+
+                    },
+                    rej=>{
+                        console.log(rej)
+                        alert("获取菜单错误")
+                    }
+                )*/
+
+            })
+        },
         computed: {
+
+
             breadCrumbList () {
                 return this.$store.state.app.breadCrumbList
             },
@@ -104,6 +131,7 @@
                     query
                 })
             },
+
             handleCollapsedChange (state) {
                 this.collapsed = state
             },
@@ -132,7 +160,9 @@
                 this.setBreadCrumb(newRoute)
                 this.setTagNavList(getNewTagList(this.tagNavList, newRoute))
                 this.$refs.sideMenu.updateOpenName(newRoute.name)
-            }
+            },
+
+
         },
         mounted () {
             /**
@@ -150,6 +180,7 @@
                 })
             }
         }
+
     }
 </script>
 
@@ -224,9 +255,5 @@
     .ivu-select-dropdown.ivu-dropdown-transfer {
         max-height: 400px;
     }
-    .avater{
-        margin-top: 15px;
-        color: #f56a00;
-        background-color: #fde3cf;
-    }
+
 </style>

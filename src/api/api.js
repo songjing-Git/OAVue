@@ -1,6 +1,30 @@
-import {Get, Post, Put,Delete} from "../api/index"
+import {Get, Post, Put, Delete, GetBlob, awaitPost} from "../api/index"
 export default {
 
+
+    /**
+     *
+     * @returns {Promise<unknown>}
+     */
+     getRouterMenuList(){
+        return  awaitPost(
+            "menu/getAll"
+        )
+    },
+
+    getImgCode(){
+        return GetBlob(
+            "getCodeImg",
+
+        )
+    },
+
+
+    /**
+     * 发送报销审核邮件
+     * @param param
+     * @returns {Promise | Promise<unknown>}
+     */
     sendRmbApprove(param){
       return Post(
           "send/reimbursement",
