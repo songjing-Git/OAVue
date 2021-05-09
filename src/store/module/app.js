@@ -6,12 +6,13 @@ import {getMenuByRouter,getTagNavListFromLocalstorage,
 
 export default {
     state: {
+        rightList:[],
         breadCrumbList: [],
         tagNavList: [],
         homeRoute: getHomeRoute(startRouter, "main"),
     },
     getters: {
-        menuList: (state, getters, rootState) => getMenuByRouter(startRouter, rootState.user.access),
+        menuList: (state, getters) => getMenuByRouter(startRouter, getters.getAccess),
     },
     mutations:{
         setTagNavList (state, list) {
@@ -47,6 +48,9 @@ export default {
         setBreadCrumb (state, route) {
             state.breadCrumbList = getBreadCrumbList(route, state.homeRoute)
         },
+        setRightList(state,data) {
+            state.rightList=data
+        }
     },
     action:{
     },

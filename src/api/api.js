@@ -1,4 +1,4 @@
-import {Get, Post, Put, Delete, GetBlob, awaitPost} from "../api/index"
+import {Get, Post, Put, Delete, GetBlob, awaitPost,awaitRequest} from "../api/index"
 export default {
 
 
@@ -117,7 +117,7 @@ export default {
      * @returns {Promise<unknown>}
      */
     getStaffInfoByName(username){
-        return Get(
+        return awaitRequest(
             'staff/selectStaffInfoByName/'+`${username}`,
             username,
         )

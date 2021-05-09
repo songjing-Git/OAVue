@@ -64,30 +64,22 @@
 
             }
         },
+
         beforeRouteEnter(to,from,next) {
             next(vm => {
-                api.getStaffInfoByName(sessionStorage.getItem("username")).then(res=>{
-                        vm.$store.dispatch('setUserInfo',res)
-                })
-                /*api.getRouterMenuList().then(
+                api.getStaffInfoByName(sessionStorage.getItem("username")).then(
                     res=>{
-                        let menuList= buildMenuTree(res,"0")
-                        sessionStorage.setItem("DynamicRouter",JSON.stringify(menuList))
-                        router.options.routes=menuList
-                        router.addRoutes(menuList)
-
+                        vm.$store.dispatch('setUserInfo',res)
                     },
                     rej=>{
-                        console.log(rej)
-                        alert("获取菜单错误")
+                        alert("获取用户信息错误"+rej)
                     }
-                )*/
+                )
+
 
             })
         },
         computed: {
-
-
             breadCrumbList () {
                 return this.$store.state.app.breadCrumbList
             },

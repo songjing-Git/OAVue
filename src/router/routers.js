@@ -1,9 +1,4 @@
 import Home from "../views/Home";
-import ParentsView from "../views/ParentsView";
-import router from 'vue-router'
-import api from "../api/api";
-import axios from 'axios'
-import el from "element-ui/src/locale/lang/el";
 export default [
     {
         path:'/',
@@ -51,6 +46,7 @@ export default [
         meta: {
             title: '系统管理',
             icon: 'md-cog',
+            access:["super_admin"]
         },
         component:Home,
         children: [
@@ -91,23 +87,6 @@ export default [
                 },
                 component:()=>import('../views/staffmgr/StaffInfo')
             },
-           /* {
-                path: '/addStaffInfo',
-                name: 'addStaffInfo',
-                meta: {
-                    title: '员工注册',
-                    icon: 'md-person'
-                },
-                component:()=>import('../views/staffmgr/AddStaff')
-            },
-            {
-                path: '/removeStaffInfo',
-                name: 'removeStaffInfo',
-                meta: {
-                    title: '员工信息修改',
-                    icon: 'md-person'
-                },
-            },*/
         ]
 
     },
@@ -167,43 +146,9 @@ export default [
 
                         component:()=>import('../views/personmgr/InterPush')
                     },
-                    /*{
-                        path: '/',
-                        name: '',
-                        meta: {
-                            title: '内推政策',
-                            icon: ''
-                        }
-                    }*/
                 ]
             },
-          /*  {
-                path: '/ProveStamp',
-                name: 'ProveStamp',
-                meta: {
-                    title: '证明盖章',
-                    icon: 'md-color-filter'
-                },
-                component:()=>import('../views/ParentsView'),
-                children: [
-                    {
-                        path: '/InternshipCer',
-                        name: 'InternshipCer',
-                        meta: {
-                            title: '实习证明',
-                            icon: 'md-color-filter'
-                        }
-                    },
-                    {
-                        path: '/IncomePro',
-                        name: 'IncomePro',
-                        meta: {
-                            title: '在职收入证明',
-                            icon: 'md-cog'
-                        }
-                    }
-                ]
-            },*/
+
             {
                 path: '/LaborRel',
                 name: 'LaborRel',
@@ -267,7 +212,7 @@ export default [
             title: '账务管理',
             icon: 'logo-usd'
         },
-        component:Home,
+        component: Home,
         children: [
             {
                 path: '/MealRbm',
@@ -276,62 +221,10 @@ export default [
                     title: '餐费报销',
                     icon: 'logo-yen'
                 },
-                component:()=>import('../views/financemgr/MealExpenses')
-            },
-            /*{
-                path: '/TransRbm',
-                name: 'TransRbm',
-                meta: {
-                    title: '车费报销',
-                    icon: 'md-car'
-                },
-                component:()=>import('../views/financemgr/TaxiFare')
-            },
-            {
-                path: '/OfficeRbm',
-                name: 'OfficeRbm',
-                meta: {
-                    title: '办公费报销',
-                    icon: 'md-briefcase',
-                }
-            },
-            {
-                path: '/OthersRbm',
-                name: 'OthersRbm',
-                meta: {
-                    title: '其他报销',
-                    icon: 'md-cart'
-                }
-            }*/
+                component: () => import('../views/financemgr/MealExpenses')
+            }
         ]
     },
-   /* {
-        path: '/InfoMgr',
-        name: 'InfoMgr',
-        meta: {
-            title: '信息管理',
-            icon: 'md-information'
-        },
-        component:Home,
-        children: [
-            {
-                path: '/notificationMgr',
-                name: 'notificationMgr',
-                meta: {
-                    title: '公告管理',
-                    icon: 'md-notifications'
-                }
-            },
-            {
-                path: '/NewsRelease',
-                name: 'NewsRelease',
-                meta: {
-                    title: '新闻发布',
-                    icon: 'md-book'
-                }
-            },
-        ]
-    },*/
 
     {
         path: '/AssistantMgr',
@@ -357,7 +250,8 @@ export default [
         name: 'ProjectMgr',
         meta: {
             title: '项目管理',
-            icon: 'md-infinite'
+            icon: 'md-infinite',
+
         },
         component:Home,
         children: [
@@ -396,7 +290,8 @@ export default [
                         name: 'productDemand',
                         meta: {
                             title: '产品需求',
-                            icon: ''
+                            icon: '',
+                            access:["pd","super_admin"]
                         },
                         component: () => import('../views/projectmgr/ProductDemand')
                     },
@@ -405,28 +300,11 @@ export default [
                         name: 'UIDesign',
                         meta: {
                             title: 'UI设计',
-                            icon: ''
+                            icon: '',
+                            access:["UI","super_admin"]
                         },
                         component: () => import('../views/projectmgr/UI')
                     },
-                   /* {
-                        path: '/ProjectTest',
-                        name: 'ProjectTest',
-                        meta: {
-                            title: '项目测试',
-                            icon: ''
-                        },
-                        component: () => import('../views/projectmgr/ProjectTask')
-                    },
-                    {
-                        path: '/ProjectDeployment',
-                        name: 'ProjectDeployment',
-                        meta: {
-                            title: '项目部署',
-                            icon: ''
-                        },
-                        component: () => import('../views/projectmgr/ProjectTask')
-                    }*/
                 ]
             },
         ]
@@ -472,213 +350,8 @@ export default [
                 component:()=>import('../components/page/SubmitSuccess')
             },
         ]
-    }
-]
-let startRouter=[
-
-    {
-        path:'/',
-        redirect:'/login',
-        meta: {
-            hideInMenu: true
-        }
-    },
-    {
-        path: '/login',
-        name: 'login',
-        meta: {
-            title: '登录',
-            hideInMenu: true,
-        },
-        component:()=>import('../views/Login')
-    },
-    {
-        path: '/home',
-        name:'home',
-        meta: {
-            hideInMenu: true,
-            notCache: false,
-        },
-        component:()=>import('../views/Home'),
-        children: [
-            {
-                path: "/home",
-                redirect:"/main"
-            },
-            {
-                path:"/main",
-                name:"main",
-                meta: {
-                    title: '首页',
-                    icon: "md-home"
-                },
-                component:()=>import('../views/MainView')
-            }
-        ]
-    },
-    {
-        path: '/ProjectMgr',
-        name: 'ProjectMgr',
-        meta: {
-            title: '项目管理',
-            icon: 'md-infinite'
-        },
-        component:Home,
-        children: [
-            {
-                path: '/ProjectInfo',
-                name: 'ProjectInfo',
-                meta: {
-                    title: '项目查询',
-                    icon: 'md-infinite',
-                    notCache: true
-                },
-                component:()=>import('../views/projectmgr/ProjectInfo')
-            },
-            {
-                path: '/ProjectApp',
-                name: 'ProjectApp',
-                meta: {
-                    title: '立项申请',
-                    icon: 'md-infinite'
-                },
-                component:()=>import('../views/projectmgr/ProjectApp')
-            },
-
-            {
-                path: '/TaskAllocation',
-                name: 'TaskAllocation',
-                meta: {
-                    title: '项目任务',
-                    icon: 'md-infinite'
-                },
-            /*component:()=>import('../views/projectmgr/ProjectTask')*/
-            component:()=>import('../views/ParentsView'),
-    children: [
-    {
-        path: '/productDemand',
-        name: 'productDemand',
-        meta: {
-            title: '产品需求',
-            icon: ''
-        },
-        component: () => import('../views/projectmgr/ProductDemand')
-    },
-    {
-        path: '/UIDesign',
-        name: 'UIDesign',
-        meta: {
-            title: 'UI设计',
-            icon: ''
-        },
-        component: () => import('../views/projectmgr/UI')
-    },
-    {
-    path: '/ProjectTest',
-    name: 'ProjectTest',
-    meta: {
-    title: '项目测试',
-        icon: ''
-},
-component: () => import('../views/projectmgr/ProjectTask')
-},
-{
-    path: '/ProjectDeployment',
-        name: 'ProjectDeployment',
-    meta: {
-    title: '项目部署',
-        icon: ''
-},
-    component: () => import('../views/projectmgr/ProjectTask')
-}
-]
-},
-]
-},
-    {
-        path: '/500',
-        name: 'error_500',
-        meta: {
-            hideInMenu: true
-        },
-    },
-    {
-        path: '*',
-        name: 'error_404',
-        meta: {
-            hideInMenu: true
-        },
-
-    },
-    {
-        path: '/Submit',
-        name: 'Submit',
-        meta: {
-            hideInMenu: true,
-        },
-        component:()=>import('../components/page/SubmitSuccess')
-    },
-    {
-        path: '/Submit',
-        name: 'Submit',
-        meta: {
-            hideInMenu: true,
-        },
-        component:Home,
-        children: [
-            {
-                path: '/Success',
-                name: 'Success',
-                meta: {
-                    notTagShow: true,
-                    hideInMenu: true,
-                },
-                component:()=>import('../components/page/SubmitSuccess')
-            },
-        ]
     },
 ]
-/*
-function buildMenuTree(menuList,pid) {
-    let treeList=[]
-    menuList = Array.from(menuList);
-    menuList.forEach(menu=>{
-        if (pid==menu.parentMenuId){
-            let meta={
-                title:menu.title,
-                icon:menu.icon
-            }
-            if (menu.component==="Home"){
-                menu.component=()=>import("../views/Home")
-            }else if (menu.component==="ParentsView"){
-                menu.component=()=>import("../views/ParentsView")
-            }else {
-                menu.component=()=>import("../views/Home")
-            }
-            menu["meta"]=meta
-            menu.children=buildMenuTree(menuList,menu.menuId)
-            treeList.push(menu)
-        }
-    })
-    return treeList
-}
-let menuList=[]
-/!*api.getRouterMenuList().then(
-    res=>{
-        menuList=buildMenuTree(res,"0")
-        sessionStorage.setItem("DynamicRouter",JSON.stringify(menuList))
-    },
-    rej=>{
-        console.log(rej)
-        alert("获取菜单错误")
-    }
-)*!/
-menuList=startRouter
-if (sessionStorage.getItem("DynamicRouter")){
-    menuList=startRouter.concat(JSON.parse(sessionStorage.getItem("DynamicRouter")) )
-}
-console.log(menuList)*/
-
 
 
 

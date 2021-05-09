@@ -44,6 +44,22 @@ error => {
         }
     }
 )
+export async function  awaitRequest(url, params) {
+    return await new Promise((resolve, reject) => {
+        axios.get(url, {
+            params: params,
+        }).then(res => {
+            resolve(res.data);
+        }).catch(err => {
+            reject(err.data)
+        })
+    });
+}
+
+
+
+
+
 /**
  * 封装get请求
  * songjing@asiainfo

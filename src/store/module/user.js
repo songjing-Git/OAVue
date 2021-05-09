@@ -23,18 +23,20 @@ export default {
             workAge:'',
             birthday:0,
             BASE_SALARY:'',
-            access: '',//权限等级
+            access:"",
             HEAD_PHOTO:'',//头像
             salaryId:0,
         },
     },
 
     getters:{
+        getAccess :state => state.user.access
+
     },
     mutations:{
         setUserInfo (state,userInfo) {
             state.user ={...userInfo}
-        }
+        },
     },
     actions:{
         // 登录

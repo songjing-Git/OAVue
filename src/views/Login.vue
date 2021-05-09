@@ -114,6 +114,7 @@
                 //     }
                 // })
                 //查询登录员工的信息
+
                 sessionStorage.setItem("username",this.username)
                 this.$router.push("/home")
 
