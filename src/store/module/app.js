@@ -12,7 +12,7 @@ export default {
         homeRoute: getHomeRoute(startRouter, "main"),
     },
     getters: {
-        menuList: (state, getters) => getMenuByRouter(startRouter, getters.getAccess),
+        menuList: (state, getters) => getMenuByRouter(startRouter, getters.getRoles),
     },
     mutations:{
         setTagNavList (state, list) {

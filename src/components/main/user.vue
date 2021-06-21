@@ -4,6 +4,7 @@
             <Avatar class="avater" >{{getStaffName}}</Avatar>
             <Icon :size="18" type="md-arrow-dropdown"></Icon>
             <DropdownMenu slot="list">
+                <DropdownItem name="updateUserInfo">修改个人信息</DropdownItem>
                 <DropdownItem name="logout">退出登录</DropdownItem>
             </DropdownMenu>
         </Dropdown>
@@ -31,11 +32,16 @@
             handleClick (name) {
                 switch (name) {
                     case 'logout':
-                        this.handleLogOut().then(() => {
+                        /*this.handleLogOut().then(() => {
                             this.$router.push({
                                 name: 'login'
                             })
-                        })
+                        })*/
+                        sessionStorage.clear()
+                        this.$router.push("/login")
+                        break
+                    case 'updateUserInfo':
+                        this.$router.push("/updateUserInfo")
                         break
                 }
             }

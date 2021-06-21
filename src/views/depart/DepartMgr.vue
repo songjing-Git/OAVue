@@ -33,7 +33,7 @@
 
                 <Button type="error" size="small" @click="getDepartId(row)">删除</Button>
 
-                <Button type="error" size="small" @click="isUpdateDepart=true">修改</Button>
+                <Button type="error" size="small" @click="getUpdateDepartId(row)">修改</Button>
             </template>
 
 
@@ -45,6 +45,7 @@
                     :width="520"
                     v-model="isAddDepart"
                     title="新增部门"
+                    ok-text="提交"
                     @on-ok="isAddDepartOK"
                     @on-cancel="cancel">
                     <Form :label-width="100" label-position="left" show-message v-model="isAddDepart">
@@ -73,10 +74,36 @@
                     v-model="departAddStaff"
                     title="加入员工"
                     :width="890"
-                    @on-ok="departAddStaffOK"
                     @on-cancel="cancel">
-                    <depart-add-staff :table-date="staffInfo"/>
-
+                    <!--添加部门员工-->
+                    <!--<depart-add-staff :table-date="staffInfo" />-->
+                    <Table
+                        border="true"
+                        ref="tablesMain"
+                        :data="staffInfo.records"
+                        :columns="propColumns"
+                        :stripe="true"
+                        :border="false"
+                        :show-header="true"
+                        :disabled-hover="false"
+                        :highlight-row="true"
+                        no-data-text="数据为空时显示的提示内容"
+                        no-filtered-data-text="筛选数据为空时显示的提示内容"
+                    >
+                        <slot name="footer" slot="footer">
+                            <Page :total="staffInfo.total"
+                                  show-total
+                                  show-elevator
+                                  show-sizer
+                                  :placement="'top'"
+                                  :current="param.propCurrent"
+                                  :page-size-opts="[10,20,50,100]"
+                                  @on-change="updatePropCurrentPage"
+                                  @on-page-size-change="updatePropPageSize"
+                            />
+                        </slot>
+                        <slot name="loading" slot="loading"></slot>
+                    </Table>
                 </Modal>
                 <Modal
                     v-model="removeDepart"
@@ -90,6 +117,27 @@
                     title="修改部门"
                     @on-ok="isUpdateDepartOK"
                     @on-cancel="cancel">
+                    <Form :label-width="100" label-position="left" show-message v-model="isAddDepart">
+                        <Row>
+                            <Col>
+                                <FormItem label="部门编号:" >
+                                    <Input v-model="updateDepart.departId" disabled> </Input>
+                                </FormItem>
+                                <FormItem label="部门名称:" >
+                                    <Input v-model="updateDepart.departName"> </Input>
+                                </FormItem>
+                                <FormItem label="部门人数:" >
+                                    <Input v-model="updateDepart.departStaffCount"> </Input>
+                                </FormItem>
+                                <FormItem label="部门最大人数:" >
+                                    <Input v-model="updateDepart.departStaffMax"> </Input>
+                                </FormItem>
+                                <FormItem label="部门经理:" >
+                                    <Input v-model="updateDepart.departMgr"> </Input>
+                                </FormItem>
+                            </Col>
+                        </Row>
+                    </Form>
                 </Modal>
             </slot>
             <slot name="footer" slot="footer">
@@ -124,7 +172,29 @@
                     total:0,
                     records:[],
                 },
-                staffInfo:{},
+                param:{
+                    propCurrent:1,
+                    propPageSize:10,
+                },
+
+                staffInfo:{
+                    total:0,
+                    records:[],
+                },
+                propColumns: [
+                    {
+                        type: 'selection',
+                        width: 60,
+                        align: 'center'
+                    },
+                    { title: '员工编号' ,key:'staff_id', align: 'center'},
+                    { title: '员工姓名', key: 'staff_name' ,sortable: true,align: 'center' },
+                    { title: '性别',  key: 'gender' ,align: 'center'},
+                    { title: '在职状态',key: 'work_state',align: 'center'},
+                    { title: '联系方式' , key: 'phone',align: 'center'},
+                    { title: '职位等级' , key: 'jobLevelName',align: 'center'},
+
+                ],
                 columns: [
                     {
                         type: 'selection',
@@ -158,6 +228,13 @@
                     departStaffMax:'',
                     departMgr:'',
                 },
+                updateDepart:{
+                    departId:'',
+                    departName:'',
+                    departStaffCount:'',
+                    departStaffMax:'',
+                    departMgr:'',
+                },
                 departId:null,
             }
         },
@@ -185,11 +262,22 @@
         },
         methods: {
             isUpdateDepartOK () {
-                this.$Message.success('提交成功');
+                api.updateDepart(this.updateDepart).then(
+                    res=>{
+                        console.log(res)
+                        this.$Message.success('提交成功');
+                    },
+                    rej=>{
+                        console.log(rej)
+                        this.$Message.error('提交失败')
+                    }
+                )
+
             },
             isAddDepartOK(){
                 api.insertDepart(this.addDepart).then(
                     res=>{
+                        console.log(res)
                         this.$Message.success('提交成功')
                     },
                     rej=>{
@@ -197,16 +285,15 @@
                         console.log(rej)
                     }
                 )
-
-
             },
             /**
              * 点击添加员工按钮触发的方法
              */
             departAdd(){
                 this.departAddStaff=true
-                api.getStaffInfoList().then(
+                api.getNoDeptStaff(this.param).then(
                     res=>{
+                        console.log(res)
                         this.staffInfo=res
                     },
                     rej=>{
@@ -214,12 +301,45 @@
                     }
                 )
             },
-            departAddStaffOK(){
-
+            updatePropCurrentPage(propCurrent){
+                console.log(propCurrent)
+                this.param.propCurrent=propCurrent
+                api.getNoDeptStaff(this.param).then(
+                    res=>{
+                        console.log(res)
+                        this.staffInfo=res
+                    },
+                    rej=>{
+                        console.log(rej)
+                        alert(rej)
+                    }
+                )
+            },
+            updatePropPageSize(propPageSize){
+                console.log(propPageSize)
+                this.param.propPageSize=propPageSize
+                api.getNoDeptStaff(this.param).then(
+                    res=>{
+                        console.log(res)
+                        this.staffInfo=res
+                    },
+                    rej=>{
+                        console.log(rej)
+                        alert(rej)
+                    }
+                )
             },
             getDepartId(row){
                 this.removeDepart=true
                 this.departId=row.departId
+            },
+            getUpdateDepartId(row){
+                this.isUpdateDepart=true
+                this.updateDepart.departId=row.departId
+                this.updateDepart.departName=row.departName
+                this.updateDepart.departMgr=row.departMgr
+                this.updateDepart.departStaffCount=row.departStaffCount
+                this.updateDepart.departStaffMax=row.departStaffMax
             },
             /**
              * 删除部门按钮
@@ -230,7 +350,7 @@
                         alert("删除成功")
                     },
                     rej=>{
-                        alert("删除失败")
+                        alert("删除失败"+rej)
                     }
                 )
             },
@@ -262,6 +382,7 @@
                     }
                 )
             },
+
             DepartInfoSearch(){
                 api.getDepartInfo(this.search).then(
                     res=>{

@@ -12,7 +12,6 @@
             <Header class="header-con">
                 <header-bar :collapsed="collapsed" @on-coll-change="handleCollapsedChange">
                     <user  :user-avator="userAvator"/>
-
                     <full-screen v-model="isFullscreen" style="margin-right: 10px;"/>
                 </header-bar>
             </Header>
@@ -53,6 +52,7 @@
     import CustomBreadCrumb from "../components/main/custom-bread-crumb";
     import api from "../api/api";
     import {router} from "../router";
+    import axios from "axios";
     export default {
         name: "Home",
         components: {CustomBreadCrumb, ParentsView, FullScreen, User, TagsNav, HeaderBar,  SideMenu},
@@ -64,20 +64,19 @@
 
             }
         },
-
         beforeRouteEnter(to,from,next) {
             next(vm => {
                 api.getStaffInfoByName(sessionStorage.getItem("username")).then(
                     res=>{
+                        console.log(res)
                         vm.$store.dispatch('setUserInfo',res)
                     },
                     rej=>{
                         alert("获取用户信息错误"+rej)
                     }
                 )
-
-
             })
+
         },
         computed: {
             breadCrumbList () {

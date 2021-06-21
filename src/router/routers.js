@@ -46,7 +46,7 @@ export default [
         meta: {
             title: '系统管理',
             icon: 'md-cog',
-            access:["super_admin"]
+            access:["ROLE_root"]
         },
         component:Home,
         children: [
@@ -55,8 +55,9 @@ export default [
                 name: '/roleMgr',
                 meta: {
                     title: '角色管理',
-                    icon: ''
+                    icon: '',
                 },
+                component:()=>import("../views/sysMgr/roleMgr")
             },
             {
                 path: '/authMgr',
@@ -95,7 +96,8 @@ export default [
         name: 'DepartMgr',
         meta: {
             title:'部门管理',
-            icon: 'md-person'
+            icon: 'md-person',
+            access:["ROLE_admin","ROLE_root"]
         },
         component:Home,
         children: [
@@ -104,7 +106,8 @@ export default [
                 name: 'departMgr',
                 meta: {
                     title: '部门管理',
-                    icon: 'md-person'
+                    icon: 'md-person',
+
                 },
                 component:()=>import('../views/depart/DepartMgr')
             },
@@ -168,14 +171,14 @@ export default [
                         component:()=>import('../views/personmgr/InterMob')
                     },
 
-                    {
+                   /* {
                         path: '/ContractRen',
                         name:'ContractRen',
                         meta:{
                             title: '合同续签',
                             icon: 'md-clipboard'
                         },
-                    },
+                    },*/
                     {
                         path: '/LeaveDeal',
                         name: 'LeaveDeal',
@@ -187,7 +190,7 @@ export default [
                     },
                 ]
             },
-            {
+           /* {
                 path:'/StaffWelfare',
                 name:'StaffWelfare',
                 meta:{
@@ -202,7 +205,7 @@ export default [
                     title:'政策制度',
                     icon:'ios-square'
                 }
-            }
+            }*/
         ]
     },
     {
@@ -215,6 +218,15 @@ export default [
         component: Home,
         children: [
             {
+                path: '/QuerySalary',
+                name: 'QuerySalary',
+                meta: {
+                    title: '工资查询',
+                    icon: ''
+                },
+                component:()=>import('../views/financemgr/QuerySalary')
+            },
+            {
                 path: '/MealRbm',
                 name: 'MealRbm',
                 meta: {
@@ -226,7 +238,7 @@ export default [
         ]
     },
 
-    {
+   /* {
         path: '/AssistantMgr',
         name: 'AssistantMgr',
         meta: {
@@ -244,14 +256,13 @@ export default [
                 },
             },
         ]
-    },
+    },*/
     {
         path: '/ProjectMgr',
         name: 'ProjectMgr',
         meta: {
             title: '项目管理',
             icon: 'md-infinite',
-
         },
         component:Home,
         children: [
@@ -270,7 +281,8 @@ export default [
                 name: 'ProjectApp',
                 meta: {
                     title: '立项申请',
-                    icon: 'md-infinite'
+                    icon: 'md-infinite',
+                    access: ["ROLE_admin","ROLE_th","ROLE_root"]
                 },
                 component:()=>import('../views/projectmgr/ProjectApp')
             },
@@ -291,20 +303,20 @@ export default [
                         meta: {
                             title: '产品需求',
                             icon: '',
-                            access:["pd","super_admin"]
+                            access:["ROLE_th","ROLE_root"]
                         },
                         component: () => import('../views/projectmgr/ProductDemand')
                     },
-                    {
+                   /* {
                         path: '/UIDesign',
                         name: 'UIDesign',
                         meta: {
                             title: 'UI设计',
                             icon: '',
-                            access:["UI","super_admin"]
+                            access:["ROLE_th","ROLE_root"]
                         },
-                        component: () => import('../views/projectmgr/UI')
-                    },
+                        component: () => import('../views/projectmgr/UI2')
+                    },*/
                 ]
             },
         ]
@@ -330,14 +342,6 @@ export default [
         meta: {
             hideInMenu: true,
         },
-        component:()=>import('../components/page/SubmitSuccess')
-    },
-    {
-        path: '/Submit',
-        name: 'Submit',
-        meta: {
-            hideInMenu: true,
-        },
         component:Home,
         children: [
             {
@@ -348,6 +352,15 @@ export default [
                     hideInMenu: true,
                 },
                 component:()=>import('../components/page/SubmitSuccess')
+            },
+            {
+                path: '/updateUserInfo',
+                name: 'updateUserInfo',
+                meta: {
+                    notTagShow: true,
+                    hideInMenu: true,
+                },
+                component:()=>import('../components/page/updateUserInfo')
             },
         ]
     },

@@ -54,7 +54,7 @@
                     :width="780"
                     v-model="isAddStaff"
                     title="添加员工"
-                    @on-ok="ok"
+                    footer-hide
                     @on-cancel="cancel">
                     <AddStaff :depart="depart" />
 
@@ -171,18 +171,6 @@
         methods: {
             onIsSearch(){
                 this.isShow=!this.isShow
-            },
-            ok (staffInfo) {
-                console.log(staffInfo)
-                api.insertStaffInfo(staffInfo).then(
-                    res=>{
-                        this.$Message.success('提交成功');
-                    },
-                    rej=>{
-                        this.$Message.error(rej)
-                    }
-                )
-
             },
             cancel () {
                 this.$Message.info('取消成功');

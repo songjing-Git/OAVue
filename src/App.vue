@@ -18,6 +18,7 @@
         overflow: hidden;
         margin: 0;
         padding: 0;
+        background-image: url("./assets/backgroup.png");
     }
     #app {
         width: 100%;

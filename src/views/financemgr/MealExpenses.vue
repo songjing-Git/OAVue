@@ -39,7 +39,7 @@
                             :data="mealDate"
                         >
                             <slot name="header" slot="header" >
-                                <Col :xl="{offset:20}">
+                                <Col :xl="{offset:18}">
                                     <Button type="success"  @click="remove(index)">导入excel</Button>
                                     <Button type="error"  @click="remove(index)">删除</Button>
                                     <Button type="error"  @click="addLine(index)">添加</Button>
@@ -112,7 +112,7 @@
                     {
                         type:'',
                         money:'',
-                        date:'',
+                        date:new Date(),
                         code:'',
                         remark:'',
                     }

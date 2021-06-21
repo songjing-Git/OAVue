@@ -6,6 +6,7 @@ import axios from 'axios'
 import {Modal} from 'view-design'
 axios.defaults.timeout=10000
 axios.defaults.baseURL="http://localhost:8084/"
+axios.defaults.withCredentials=true
 /*axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'*/
 axios.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8'
 /**
@@ -59,7 +60,6 @@ export async function  awaitRequest(url, params) {
 
 
 
-
 /**
  * 封装get请求
  * songjing@asiainfo
@@ -83,9 +83,11 @@ export function GetBlob(url, params){
  */
 export function Get(url, params){
     return new Promise((resolve, reject) =>{
-        axios.get(url, {
+        axios.get(url,
+            {
             params: params,
-        }).then(res => {
+        }
+        ).then(res => {
             resolve(res.data);
         }).catch(err =>{
             reject(err.data)
@@ -114,9 +116,7 @@ export function Post(url ,data) {
  */
 export function Put(url ,data) {
     return new Promise((resolve, reject) =>{
-        axios.put(url,{
-            data:data
-        }).then(res=>{
+        axios.put(url,data).then(res=>{
             resolve(res.data)
         }).catch(err=>{
             reject(err.data)
@@ -155,3 +155,6 @@ export async function awaitPost(url ,data) {
         )
     })
 }
+
+
+

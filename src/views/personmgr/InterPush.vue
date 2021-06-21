@@ -59,8 +59,7 @@
                                     type="drag"
                                     :format="['doc','pdf','docx']"
                                     :max-size="20480"
-                                    :before-upload="handleUpload"
-                                    action="http://localhost:8084/pushSend">
+                                    :action="this.actionUrl">
                                     <div style="padding: 20px 0">
                                         <Icon type="ios-cloud-upload" size="52" style="color: #3399ff"></Icon>
                                         <p>请上传被推荐人的简历</p>
@@ -118,8 +117,11 @@
         props: {},
         data () {
             return {
+                actionUrl:"http://localhost:8084/pushSend",
+                headers:{
+                    "Content-Type":"multipart/form-data"
+                },
                 file: null,
-                loadingStatus: false,
                 tableDate: {
                     total:0,
                     records:[],
@@ -198,11 +200,7 @@
                     }
                 )
             },
-            //上传成功
-            handleUpload (file) {
-                this.file = file;
-                return false;
-            },
+
             ok () {
 
             },

@@ -8,19 +8,19 @@
                         <Card>
                             <p slot="title">个人信息</p>
                             <div class="main_break_img">
-                                <Avatar class="main_img" size="100">宋</Avatar>
+                                <Avatar class="main_img" size="100">{{getUserInfo.staffName.substr(0,1)}}</Avatar>
                             </div>
                             <div>
-                                姓名:宋京
+                                姓名:{{getUserInfo.staffName}}
                             </div>
                             <div>
-                                所属部门:研发部
+                                所属部门:{{getUserInfo.departName}}
                             </div>
                             <div>
                                 本月工作时长:30小时
                             </div>
                             <div>
-                                岗位:java开发工程师
+                                岗位:{{getUserInfo.jobLevelName}}
                             </div>
                         </Card>
                     </Col>
@@ -120,7 +120,11 @@
                 )
             })
         },
-        computed: {},
+        computed: {
+            getUserInfo () {
+                return this.$store.state.user.user
+            },
+        },
         methods: {
 
             drawLine(){

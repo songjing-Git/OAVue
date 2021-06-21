@@ -1,17 +1,128 @@
-import {Get, Post, Put, Delete, GetBlob, awaitPost,awaitRequest} from "../api/index"
+import {Get, Post, Put, Delete, GetBlob,awaitRequest} from "../api/index"
 export default {
 
 
     /**
-     *
-     * @returns {Promise<unknown>}
+     * 更新员工信息
+     * @param param
+     * @returns {Promise | Promise<unknown>}
      */
-     getRouterMenuList(){
-        return  awaitPost(
-            "menu/getAll"
+    updateStaffInfos(param){
+        return Put(
+            "staff/updateStaffInfos",
+            param
         )
     },
 
+    /**
+     * 查询薪资接口
+     * @param param
+     * @returns {Promise | Promise<unknown>}
+     */
+    querySalary(param){
+        return Get(
+            "/salary/querySalaryInfo",
+            param
+        )
+    },
+
+    /**
+     * 离职办理
+     * @param param
+     * @returns {Promise | Promise<unknown>}
+     */
+    leaveDeal(param){
+        return Post(
+            "/leaveDeal/leaveDeal",
+            param
+        )
+    },
+
+    /**
+     * 更新权限
+     * @param targetKeys
+     * @returns {Promise | Promise<unknown>}
+     */
+    updateRole(targetKeys){
+        return Put(
+            "/userRole/updateRole",
+        targetKeys
+        )
+    },
+
+    /**
+     * 获取所有角色
+     * @returns {Promise<*>}
+     */
+    selectAllRole(){
+        return awaitRequest(
+            "userRole/selectAllRole"
+        )
+    },
+
+    /**
+     * 获取员工没有的身份
+     * @param staffId
+     * @returns {Promise | Promise<unknown>}
+     */
+    selectStaffNoRole(staffId){
+        return Get(
+            "userRole/selectStaffNoRole/"+`${staffId}`,
+        )
+    },
+
+
+    /**
+     * 获取员工角色信息
+     * @param staffId
+     * @returns {Promise | Promise<unknown>}
+     */
+    selectStaffRole(staffId){
+        return Get(
+            "userRole/selectStaffRole/"+`${staffId}`,
+        )
+    },
+
+    /**
+     * 更新项目
+     * @param param
+     * @returns {Promise | Promise<unknown>}
+     */
+    updateProject(param){
+        return Put(
+            "project/updateProject",
+            param
+        )
+    },
+
+    /**
+     * 新增项目
+     * @param param
+     * @returns {Promise | Promise<unknown>}
+     */
+    insertProject(param){
+        return Post(
+            "project/insertProject",
+            param
+        )
+    },
+
+    /**
+     * 更新部门接口
+     * @param param
+     * @returns {Promise<unknown>}
+     */
+    updateDepart(param){
+        return Put(
+            "depart/updateDepart",
+            param
+        )
+    },
+
+    /**
+     * 获取验证码
+     * @returns {Promise<unknown>}
+     */
     getImgCode(){
         return GetBlob(
             "getCodeImg",
@@ -73,7 +184,7 @@ export default {
      */
     pushSend(File){
         return Post(
-            "pushSend",
+            "/pushSend",
             File
         )
     },
@@ -94,8 +205,8 @@ export default {
      */
      login (username,password) {
         return  Post(
-             "user/login",
-         {username,password}
+             "/login",
+            {username,password},
          )
     },
 
@@ -123,6 +234,17 @@ export default {
         )
     },
 
+    /**
+     * 查询没有部门信息的用户
+     * @param param
+     * @returns {Promise<unknown>}
+     */
+    getNoDeptStaff(param){
+        return Get(
+            'staff/selectNoDeptStaff',
+            param
+        )
+    },
 
     /**
      * 查询职位信息
@@ -193,6 +315,32 @@ export default {
         )
     },
 
+
+    /**
+     * 发送UI图
+     * @param param
+     * @returns {Promise | Promise<unknown>}
+     */
+    sendUI(param){
+        return Post(
+            "send/UI",
+            param,
+            {headers:{'Content-Type':'multipart/form-data'}}
+        )
+    },
+
+    /**
+     * 发送需求信息
+     * @param param
+     * @returns {Promise | Promise<unknown>}
+     */
+    sendPd(param){
+        return Post(
+            "send/Pd",
+            param,
+
+        )
+    }
 
 }
 

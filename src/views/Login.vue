@@ -25,12 +25,12 @@
                 <Col :xl="16">
                     <FormItem>
                         <Col :xl="22">
-                            <Input type="text" placeholder="请输入验证码"  >
+                            <Input type="text" placeholder="请输入验证码" v-model="code" >
                                 <span slot="prepend">验证码:</span>
                             </Input>
                         </Col>
                     </FormItem>
-                </Col>
+                </Col>  
                 <Col :xl="8">
                     <img :src="imgCode"/>
                 </Col>
@@ -38,8 +38,8 @@
             <Row>
                 <Col>
                     <FormItem>
-                        <Button size="small" type="info">忘记密码?</Button>
-                        <Checkbox v-model="single" style="margin-left: 30%">记住密码</Checkbox>
+                        <!--<Button size="small" type="info" >忘记密码?</Button>-->
+                        <Checkbox name="remember-me"  v-model="single" >记住密码</Checkbox>
                     </FormItem>
                 </Col>
             </Row>
@@ -66,6 +66,7 @@
     import routers from "../router/routers";
     import {menuRouterHandle} from "../utils/util";
     import {router} from "../router";
+    import axios from "axios";
 
     export default {
         name: "Login",
@@ -73,10 +74,11 @@
         data() {
             return {
                 username:'songjing3',
-                password:'songjing3!',
-                single:false,
+                password:'123',
+                single:true,
                 result:"",
                 imgCode:"",
+                code:""
 
             }
         },
@@ -104,19 +106,66 @@
             })
         },
         methods: {
-            onSubmit(){
 
-                // //查询登录账户密码
-                // console.log(api.login(this.username, this.password));
-                // api.login(this.username,this.password).then(res=>{
-                //     if (res){
-                //         this.$router.push("/home")
-                //     }
-                // })
-                //查询登录员工的信息
+            onSubmit(){
+                if (!this.username){
+                    this.$Message.error("用户名不能为空")
+                    return
+                }
+                const img = btoa(
+                    new Uint8Array(this.code).reduce(
+                        (data, byte) => data + String.fromCharCode(byte), "")
+                )
+                /*if (img!==this.imgCode){
+                    this.$Message.error("验证码错误")
+                    return;
+                }*/
 
                 sessionStorage.setItem("username",this.username)
-                this.$router.push("/home")
+                sessionStorage.setItem("password",this.password)
+                axios({
+                    method: 'post',
+                    url: '/login',
+                    data: {
+                        username: this.username,
+                        password: this.password
+                    },
+                    transformRequest: [
+                        function (data) {
+                            let ret = ''
+                            for (let it in data) {
+                                ret +=
+                                    encodeURIComponent(it) +
+                                    '=' +
+                                    encodeURIComponent(data[it]) +
+                                    '&'
+                            }
+                            return ret
+                        }
+                    ],
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    }
+                }).then(
+                    res=>{
+                        console.log(res)
+                        if(res.data.message==="登录成功"){
+                            this.$router.push("/home")
+                        }else {
+                            this.$Message.error(res.data.message)
+                        }
+                    },
+                )
+                /*//查询登录账户密码
+                api.login(this.username,this.password).then(res=>{
+                    if (res){
+                        console.log(this.username)
+                        this.$router.push("/home")
+                    }
+                })*/
+
+
+
 
             }
         },

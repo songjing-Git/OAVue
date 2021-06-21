@@ -63,27 +63,12 @@
         computed: {},
         methods: {
             updateCurrentPage(currentPage){
-                this.current=currentPage
-                api.getStaffInfoList(this.search).then(
-                    res=>{
-                        this.tableDate=res
-                    },
-                    rej=>{
-                        console.log(rej)
-                    }
-                )
-
+                console.log(currentPage)
+                this.$emit("updatePageSize" ,currentPage )
             },
             updatePageSize(pageSize){
-                this.pageSize=pageSize
-                api.getStaffInfoList(this.search).then(
-                    res=>{
-                        this.tableDate=res
-                    },
-                    rej=>{
-                        console.log(rej)
-                    }
-                )
+                console.log(pageSize)
+                this.$emit("updatePageSize" ,pageSize )
             },
         },
         watch: {}
