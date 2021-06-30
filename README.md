@@ -5,6 +5,7 @@
 >vue全家桶 +view design UI库
 
 ## Build Setup
+首页
 
 ``` bash
 # install dependencies
