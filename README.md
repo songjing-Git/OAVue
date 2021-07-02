@@ -1,12 +1,19 @@
 # oavue
 
-> A Vue.js project
->OA系统 毕业设计 参考iview-admin模板
->vue全家桶 +view design UI库
+> A Vue.js project OA系统 毕业设计 参考iview-admin模板
+>vue2全家桶 +view design UI库
 
 ## Build Setup
-首页
+##首页
+![avatar](src/assets/home.PNG)
 
+##权限管理
+根据登录员工的角色获取动态路由数据
+###修改角色
+![avatar](src/assets/role.PNG)
+
+##员工管理
+![avatar](src/assets/staff.PNG)
 ``` bash
 # install dependencies
 npm install
